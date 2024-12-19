@@ -1,0 +1,65 @@
+project_root/
+├── data/
+│   ├── raw/
+│   │   ├── train/                # 원본 학습 이미지 (e.g. 1570장)
+│   │   ├── test/                 # 평가 이미지 (e.g. 3140장)
+│   │   ├── train.csv             # 학습 이미지에 대한 메타 정보 및 정답 라벨
+│   │   ├── sample_submission.csv # 제출 형식 예시 파일
+│   │   └── meta.csv              # 클래스 정보 메타데이터
+│   ├── processed/
+│   │   ├── train/                # 전처리 혹은 증강 후의 이미지 (필요 시)
+│   │   └── test/                 # 전처리 혹은 증강 후의 이미지 (필요 시)
+│   └── external/                 # 외부 추가 데이터나 pretrained 모델 weights 등 (필요 시)
+
+├── src/
+│   ├── configs/
+│   │   ├── base_config.yaml      # 기본 모델/학습 파라미터 설정
+│   │   └── other_exps.yaml       # 다른 실험별 파라미터 설정 파일들
+│   ├── datasets/
+│   │   ├── __init__.py
+│   │   ├── dataset.py            # 커스텀 Dataset class
+│   │   └── transforms.py         # 이미지 transform 정의 (Augmentation 등)
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── model_resnet.py       # ResNet 기반 모델 정의
+│   │   ├── model_effnet.py       # EfficientNet 기반 모델 정의
+│   │   └── model_vit.py          # ViT 기반 모델 정의
+│   ├── training/
+│   │   ├── train.py              # 학습 루프, 로깅, 체크포인트 저장
+│   │   ├── validation.py         # 검증 루프, 평가 지표 계산
+│   │   ├── scheduler.py          # Learning rate scheduler 정의
+│   │   └── losses.py             # Loss 함수 정의 (CrossEntropy, FocalLoss 등)
+│   ├── inference/
+│   │   ├── infer.py              # 테스트 세트 추론 스크립트
+│   │   └── postprocessing.py     # 후처리 로직 (Threshold 조정 등)
+│   └── utils/
+│       ├── seed_utils.py         # 시드 고정, 재현성용 함수
+│       ├── logger.py             # 로깅 함수
+│       ├── metrics.py            # F1 등 지표 계산 함수
+│       └── misc.py               # 기타 유틸 함수
+
+├── experiments/
+│   ├── exp001_baseline/
+│   │   ├── logs/                 # 학습/검증 중 나온 로그 파일(TensorBoard나 CSV 로그)
+│   │   ├── checkpoints/          # 모델 가중치 파일(.pth)
+│   │   └── predictions/          # 추론 결과 CSV나 npy 파일
+│   ├── exp002_vit/
+│   │   ├── logs/
+│   │   ├── checkpoints/
+│   │   └── predictions/
+│   └── ...                       # 다른 실험 폴더들
+
+├── notebooks/
+│   ├── EDA.ipynb                 # Exploratory Data Analysis 노트북
+│   ├── preprocessing_test.ipynb  # 전처리, 증강 실험 노트북
+│   └── model_analysis.ipynb      # 모델 결과 분석, 시각화 노트북
+
+├── reports/
+│   ├── figures/                  # 시각화된 결과 이미지
+│   └── final_report.md           # 프로젝트 최종 결과 보고서, 기록
+
+├── requirements.txt              # 패키지 의존성 리스트
+├── environment.yaml              # Conda 등 환경 설정 파일(필요 시)
+└── README.md                     # 프로젝트 개요 및 실행 방법
+
+= 이런식으로 폴더들과 파일들을 만들어줄래? experiments 폴더에 하위 폴더들은 안만들어도 돼
